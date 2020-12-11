@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>this website is mine</title>
+	<link rel="stylesheet" type="text/css" href="style4.css">
+	<script type="text/javascript" src="p5.js"></script>
+	<script type="text/javascript" src="p5.dom.js"></script>
+	<script type="text/javascript" src="p5.sound.js"></script>
+	<script type="text/javascript" src="p5.speech.js"></script>
+
+
+<script type="text/javascript">
+	
+var dis=0;
+var duration;
+var i;
+var d_button;
+var t_button;
+function m_time(t){
+	
+	duration=t;
+	d_button=1;
+	alert(duration);
+	var but=document.getElementsByTagName("button");
+	for(i=0;i<3;++i)
+	but[i].disabled=true;
+   setTimeout(speaked1,1000);
+}
+function fun(){
+	if(d_button!=1&&t_button==1){
+		speaker("you did not select your meditation time");
+
+	}
+   else
+   	if(d_button==1&&t_button!=1){
+		speaker("you did not select your music song");
+
+	}
+	else 
+			if(d_button!=1&&t_button!=1){
+		speaker("you did not select your music and meditation time");
+
+	}
+
+
+
+
+
+
+	if((d_button==1)&&(t_button==1)){
+	var but=document.getElementById("chalu");
+    but.style.backgroundImage="url('image/pause.png')";
+    m_play();
+}
+
+
+}
+
+   
+
+	
+	function m_pause(){
+	  var m=document.getElementById("music");
+	   var t_but=document.getElementsByTagName("button");
+	   var but=document.getElementById("chalu");
+       m.pause();
+       m.src="undefined";
+       but.style.backgroundImage="url('image/play1.png')";
+	   for(i=0;i<6;++i)
+	   t_but[i].disabled=false;
+	   duration="undefined";
+	    t_button=0;
+	    d_button=0;
+
+	}
+
+	function m_play(){
+	
+     var m=document.getElementById("music");
+     m.play();
+     setTimeout(m_pause,1000*duration*60);
+     
+
+	}
+	
+  function m_change(s){
+  var m=document.getElementById("music");
+   var t_but=document.getElementsByTagName("button");
+  if(s==1)
+   m.src="image/rain.mp3";
+     else
+       if(s==2)
+          m.src="image/medmusic1.mp3";
+            else
+              if(s==3)
+                m.src="image/flute.mp3";
+            t_button=1;
+        for(i=3;i<6;++i)
+	    t_but[i].disabled=true;
+	setTimeout(speaked2,1000);
+    
+
+   }
+   function speaked1(){
+
+    if(t_button!=1){
+		speaker("please select your music to play");
+	}
+	else
+		{
+
+   speaker("your music ready to play please hit the play button");
+
+	}
+
+
+   }
+
+function speaker(str){
+	speech=new p5.Speech();
+	speech.speak(str);
+
+}
+
+function speaked2(){
+
+	if(d_button!=1)
+	{
+		speaker("please select your meditationtime from your left side");
+	}
+	else 
+	{
+  speaker("your music ready to play please hit the play button");
+
+		}
+}
+
+
+
+function used(){
+
+	if(d_button==1)
+		speaker("you already select you meditation time:");
+}
+
+</script>
+
+
+
+</head>
+<body>
+<video src="image/rain.mp4"autoplay loop muted></video>
+<audio src="image/medmusic1.mp3" id="music" loop></audio>
+
+<div class="back_section">
+	
+<div class="button_section">
+
+<div class="button_tab">
+<button onclick="m_time(10)" >10</button>
+<button  onclick="m_time(20)">20</button>
+<button  onclick="m_time(30)">30</button>
+	</div>
+</div>
+
+<div class="play_section">
+	<div class="play_tab">
+		
+<div class="play_but" onclick="fun()"  id="chalu"></div>
+
+	</div>
+	
+</div>
+
+<div class="type_section">
+
+<div class="type_tab">
+	
+
+<button class="type_button1" onclick="m_change(1)" ></button>
+<button class="type_button2"   onclick="m_change(2)""></button>
+<button class="type_button3"  onclick="m_change(3)"></button>
+
+</div>
+
+
+	
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+</body>
+</html>
